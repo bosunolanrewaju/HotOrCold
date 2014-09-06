@@ -60,6 +60,7 @@ var setAnimation = function(){
 
 // To start a new game
 var resetGame = function(){
+	previousPercentWidth = percentageWidth = 0;
 	progressbar.animate({width: "0%", backgroundColor: "blue"}, "slow");
 	output.text("");
 	userPreviousNumber = 0;
