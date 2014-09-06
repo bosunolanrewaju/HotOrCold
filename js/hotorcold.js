@@ -114,30 +114,42 @@ var processGame = function(){
 }
 
 
-// JQuery action events
-$(document).ready(function(){
-	$("#userNumber").on("input", function(evt){
+
+var Actions = {
+	onReady: function(){
+		$("#userNumber").on("input", Actions.onInputValidation);
+		
+		// Listens to submit button click event
+		$("#submit").click(Actions.playGame);
+
+		// Listens to Enter keypress event on the input form tag
+		$("#userNumber").keypress(Actions.onKeypressPlayGame);
+
+		// Listens to new game button click event to reset
+		// Generates a new random number for computerNumber for the new game
+		$("#newgame").click(Actions.onResetButtonClicked);
+	},
+
+	onInputValidation: function(evt){
 		var input = document.getElementById("userNumber").value;
 		validateInput(input);
-	});
-	
-	// Listens to submit button click event
-	$("#submit").click(function(evt){
+	},
+
+	playGame: function(evt){
 		processGame();
-	});
+	},
 
-	// Listens to Enter keypress event on the input form tag
-	$("#userNumber").keypress(function(evt){
+	onKeypressPlayGame: function(evt){
 		if(evt.keyCode === 13){
-			processGame();
+			Actions.processGame();
 		}
-	});
+	},
 
-	// Listens to new game button click event to reset
-	// Generates a new random number for computerNumber for the new game
-	$("#newgame").click(function(){
+	onResetButtonClicked: function(){
 		resetGame();
 		computerNumber = Number(Math.floor(Math.random() * 100) + 1);
-	})
+	}
+}
 
-});
+// JQuery action events
+$(document).ready(Actions.onReady);
