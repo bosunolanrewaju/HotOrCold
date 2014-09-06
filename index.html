@@ -1,24 +1,33 @@
 <!DOCTYPE>
 <html>
 	<head>
-		<title>HotOrCold | Olatunbosun Olanrewaju (Team Andela)</title>
+		<title>HotOrCold &#124; Olatunbosun Olanrewaju (Team Andela)</title>
+		<meta charset="UTF-8">
+		<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Changa+One|Open+Sans:400italic,700italic,400,700,800' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="css/main.css">
 		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+		<script src="js/jquery_ext.js"></script>
 	</head>
 	<body>
 		<header>
-			
+			<h1><span class="hot">Hot</span> Or <span class="cold">Cold</span></h1>
+			<h3>Let's put your guess to work</h3>
 		</header>
 		<section>
+		<h3>I have a number between 0 and 100, can you guess what the number is?</h3>
 			<div>
-				<input id="userNumber" type="text" name="userNumber" value="">
+			
+				<input id="userNumber" type="text" name="userNumber" value="" autocomplete="off" autofocus="true">
 				<span id="error"></span>
-				<button>Submit</button>
+				<button id="submit" type="submit">Submit</button>
+				<button id="newgame" type="button">New Game</button>
+				
 			</div>
-			<div id="output"></div>
+			<div id="output-wrapper"><div id="progressbar"><span id="output">Waiting for your guess</span></div></div>
 		</section>
 		<footer>
-			
+			<span>&copy; 2014 Andela Institute</span>
 		</footer>
 		<script src="js/hotorcold.js"></script>
 	</body>
