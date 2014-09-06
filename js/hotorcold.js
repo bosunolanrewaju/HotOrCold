@@ -66,6 +66,7 @@ var resetGame = function(){
 	$("#submit").show();
 	$("#userNumber").removeProp("disabled");
 	$("#userNumber").focus();
+	output.html("Waiting for your guess")
 }
 
 
