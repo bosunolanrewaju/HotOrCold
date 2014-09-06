@@ -86,6 +86,7 @@ input, input:focus, button {
 button {
 	color: white;
 	font-size: 1em;
+	cursor: pointer;
 	width: auto;
 	display: inline-block;
 	margin: 0px 10px 20px 10px;
