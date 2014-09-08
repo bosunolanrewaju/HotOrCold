@@ -1,4 +1,4 @@
-var computerNumber = Number(Math.floor(Math.random() * 100) + 1);
+var computerNumber = Number(Math.floor(Math.random() * 100));
 var userPreviousNumber = 0;
 var percentageWidth, previousPercentWidth;
 var output = $("#output");
@@ -16,8 +16,8 @@ var validateInput = function(input){
 			if(typeof input !== "number" || isNaN(input)){
 				$("#error").text("Invalid input");
 				return false;
-			} else if (input > 100 || input < 1){
-				$("#error").text("Input out of range (1 - 100)");
+			} else if (input > 100 || input < 0){
+				$("#error").text("Input out of range (0 - 100)");
 				return false;
 			} else {
 				$("#error").text("");
@@ -32,14 +32,8 @@ var validateInput = function(input){
 // return the width in percentage as string
 var getWidth = function(){
 	previousPercentWidth = percentageWidth;
-	if(computerNumber === userNumber){
-		percentageWidth = 100;
-	} else if(userNumber < computerNumber){
-		percentageWidth =  Math.floor((userNumber / computerNumber) * 100);
-	} else {
-		var absoluteDiff = Math.abs(computerNumber - userNumber);
-		percentageWidth = (100 - Math.floor((absoluteDiff/userNumber) * 100));
-	}
+	Width = Math.max(Math.abs(100 - computerNumber), computerNumber);
+	percentageWidth = ((Width - Math.abs(computerNumber - userNumber))/Width) * 100;
 	return percentageWidth + "%";
 }
 
@@ -60,7 +54,7 @@ var setAnimation = function(){
 
 // To start a new game
 var resetGame = function(){
-	previousPercentWidth = percentageWidth = 0;
+	percentageWidth = 0;
 	progressbar.animate({width: "0%", backgroundColor: "blue"}, "slow");
 	output.text("");
 	userPreviousNumber = 0;
@@ -72,10 +66,12 @@ var resetGame = function(){
 
 
 // Prints response and plays animation of progress bar
-var response = function(){
-		setAnimation();	
+var response = function(){	
+	getWidth();
+	console.log(previousPercentWidth);
+	console.log(percentageWidth);
 		if(userPreviousNumber === 0){
-			output.html("Getting hot");
+			output.html("Warming up");
 		} else if(previousPercentWidth < percentageWidth){
 			output.html("Getting hotter!!!");
 		} else if(previousPercentWidth > percentageWidth){
@@ -83,6 +79,7 @@ var response = function(){
 		} else {
 			output.html("Not hotter Not colder");
 		}
+		setAnimation();	
 }
 
 // Takes in the computer generated number and 
@@ -141,7 +138,7 @@ var Actions = {
 
 	onKeypressPlayGame: function(evt){
 		if(evt.keyCode === 13){
-			Actions.processGame();
+			Actions.playGame();
 		}
 	},
 
